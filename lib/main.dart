@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: "Todo List App",
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent)
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)
         ),
         home: const HomepageScreen(),
       ),
