@@ -1,6 +1,6 @@
 {
-    "name": "todo_application",
-    "short_name": "todo_application",
+    "name": "PurpleDo",
+    "short_name": "PurpleDo",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

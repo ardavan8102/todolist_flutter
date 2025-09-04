@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'todo.g.dart';
 
+// Create DB Object for Todo list items
 @HiveType(typeId:0)
 class Todo extends HiveObject {
   

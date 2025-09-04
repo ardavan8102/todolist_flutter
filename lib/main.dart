@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_application/provider/TodoProvider.dart';
-import 'package:todo_application/screens/homepage_screen.dart';
+import 'package:PurpleDo/model/todo.dart';
+import 'package:PurpleDo/provider/TodoProvider.dart';
+import 'package:PurpleDo/screens/homepage_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize DB
+  await Hive.initFlutter();
+  Hive.registerAdapter(TodoAdapter());
+  await Hive.openBox<Todo>('todos');
+
+  // Run
   runApp(const MyApp());
 }
 
@@ -13,9 +23,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => TodoNotifier(),
+      create: (_) => Todoprovider(),
       child: MaterialApp(
-        title: "Todo List App",
+        debugShowCheckedModeBanner: false,
+        title: "Purple Do",
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)
         ),
