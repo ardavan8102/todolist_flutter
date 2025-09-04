@@ -12,8 +12,30 @@ class HomepageScreen extends StatelessWidget {
     final todoProvider = Provider.of<Todoprovider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('لیست کارهای روزانه'),
-        centerTitle: true,
+        title: Container(
+          alignment: Alignment.centerRight,
+          child: Text(
+            'لیست کارهای روزانه',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {}, 
+          icon: Container(
+            padding: EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: Colors.grey[100],
+              borderRadius: BorderRadius.circular(12)
+            ),
+            child: Icon(
+              Icons.question_mark_outlined,
+              color: Colors.black,
+            ),
+          )
+        ),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,

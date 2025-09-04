@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: "Purple Do",
         theme: ThemeData(
+          fontFamily: "IranSans",
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)
         ),
         home: const HomepageScreen(),
