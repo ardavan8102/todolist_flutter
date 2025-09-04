@@ -16,27 +16,83 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('افزودن کار جدید'),
+      title: Container(
+        alignment: AlignmentDirectional.center,
+        child: Text(
+          'افزودن کار جدید',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w700,
+            fontSize: 24,
+          ),
+        ),
+      ),
       content: TextField(
+        style: TextStyle(
+          fontFamily: 'IranSans',
+          fontWeight: FontWeight.w300,
+          color: Colors.black,
+        ),
+        textAlign: TextAlign.right,
         controller: _controller,
         autofocus: true,
         decoration: InputDecoration(
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.grey.shade400,
+              width: 1.0,
+            ),
+            borderRadius: BorderRadius.circular(18),
+          ),
           hintText: 'یک عنوان انتخاب کنید',
+          hintStyle: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w300,
+            color: Colors.grey,
+          )
         ),
         onSubmitted: (_) => addTodo(),
       ),
       actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.pop(context);
-          }, 
-          child: Text('لغو'),
-        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 10.0,
+          children: [
+            TextButton(
+              style: ButtonStyle(
+                padding: WidgetStatePropertyAll(EdgeInsets.fromLTRB(24, 12, 24, 12)),
+                backgroundColor: WidgetStatePropertyAll(Colors.red.shade800),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              }, 
+              child: Text(
+                'لغو',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500
+                ),
+              ),
+            ),
 
-        ElevatedButton(
-          onPressed: () => addTodo(), 
-          child: Text('افزودن')
-        ),
+            ElevatedButton(
+              style: ButtonStyle(
+                padding: WidgetStatePropertyAll(EdgeInsets.fromLTRB(32, 12, 32, 12)),
+                backgroundColor: WidgetStatePropertyAll(Colors.deepPurple[800])
+              ),
+              onPressed: () => addTodo(), 
+              child: Text(
+                'افزودن',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
+              )
+            ),
+          ],
+        )
       ],
     );
   }

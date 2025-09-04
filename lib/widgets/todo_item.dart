@@ -12,20 +12,34 @@ class TodoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<Todoprovider>(context, listen: false);
     return Card(
-      elevation: 5,
+      margin: EdgeInsets.fromLTRB(12, 0, 12, 24),
+      elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadiusGeometry.circular(12),
       ),
       child: ListTile(
         leading: Checkbox(
+          activeColor: Colors.deepPurple,
           value: todo.isDone,
           onChanged: (_) => provider.toggleTodoStatus(index),
         ),
-        title: Text(todo.title ?? ""),
+        title: Container(
+          alignment: Alignment.centerRight,
+          child: Text(
+            todo.title ?? "",
+            style: TextStyle(
+              decoration: todo.isDone ? TextDecoration.lineThrough : TextDecoration.none,
+              color: todo.isDone ? Colors.grey : Colors.black,
+            ),
+          ),
+        ),
         trailing: IconButton(
           onPressed: () => provider.deleteTodo(index),
           icon: Icon(Icons.delete),
-          color: Colors.red[900],
+          color: Colors.white,
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll(Colors.red)
+          ),
         ),
       ),
     );

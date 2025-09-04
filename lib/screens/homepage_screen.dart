@@ -48,11 +48,24 @@ class HomepageScreen extends StatelessWidget {
           }
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text(
+          'افزودن',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.deepPurple,
         onPressed: () {
           showDialog(context: context, builder: (_) => AddTodoDialog());
         },
-        child: Icon(Icons.add),
+        icon: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
     );
   }
