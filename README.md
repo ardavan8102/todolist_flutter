@@ -1,4 +1,4 @@
-# Flutter Application
+# Todo List Application
 
 A todo list application made for mobile; by A.Eskandari
 
