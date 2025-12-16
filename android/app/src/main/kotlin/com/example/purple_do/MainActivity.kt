@@ -1,4 +1,4 @@
-package com.example.PurpleDo
+package com.example.purple_do
 
 import io.flutter.embedding.android.FlutterActivity
 

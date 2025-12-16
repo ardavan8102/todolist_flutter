@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:PurpleDo/model/todo.dart';
+import 'package:purple_do/model/todo.dart';
 
 class Todoprovider extends ChangeNotifier {
 

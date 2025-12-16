@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:PurpleDo/provider/TodoProvider.dart';
-import 'package:PurpleDo/widgets/todo_dialog.dart';
-import 'package:PurpleDo/widgets/todo_item.dart';
+import 'package:purple_do/provider/todo_provider.dart';
+import 'package:purple_do/widgets/todo_dialog.dart';
+import 'package:purple_do/widgets/todo_item.dart';
 
 class HomepageScreen extends StatelessWidget {
   const HomepageScreen({super.key});

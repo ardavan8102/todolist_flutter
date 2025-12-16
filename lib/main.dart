@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
-import 'package:PurpleDo/model/todo.dart';
-import 'package:PurpleDo/provider/TodoProvider.dart';
-import 'package:PurpleDo/screens/homepage_screen.dart';
+import 'package:purple_do/model/todo.dart';
+import 'package:purple_do/provider/todo_provider.dart';
+import 'package:purple_do/screens/homepage_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

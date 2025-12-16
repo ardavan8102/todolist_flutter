@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:PurpleDo/model/todo.dart';
-import 'package:PurpleDo/provider/TodoProvider.dart';
+import 'package:purple_do/model/todo.dart';
+import 'package:purple_do/provider/todo_provider.dart';
 
+// ignore: must_be_immutable
 class TodoItem extends StatelessWidget {
   Todo todo;
   int index;
@@ -26,7 +27,7 @@ class TodoItem extends StatelessWidget {
         title: Container(
           alignment: Alignment.centerRight,
           child: Text(
-            todo.title ?? "",
+            todo.title,
             style: TextStyle(
               decoration: todo.isDone ? TextDecoration.lineThrough : TextDecoration.none,
               color: todo.isDone ? Colors.grey : Colors.black,
