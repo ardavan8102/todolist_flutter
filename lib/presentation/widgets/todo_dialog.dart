@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:purple_do/provider/todo_provider.dart';
+import 'package:tikino/data/provider/todo_provider.dart';
 
 class AddTodoDialog extends StatefulWidget {
   const AddTodoDialog({super.key});

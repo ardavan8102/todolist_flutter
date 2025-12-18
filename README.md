@@ -1,7 +1,5 @@
-# Todo List Application
+# Tikino | برنامه کارهای روزانه
 
-A todo list application made for mobile; by A.Eskandari
+Todo-List Application
 
-## More Info
-
-I Did this project for my exercise and self-train.
+## Developing . . . 

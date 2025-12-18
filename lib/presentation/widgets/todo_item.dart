@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:purple_do/model/todo.dart';
-import 'package:purple_do/provider/todo_provider.dart';
+import 'package:tikino/data/model/todo.dart';
+import 'package:tikino/data/provider/todo_provider.dart';
 
 // ignore: must_be_immutable
 class TodoItem extends StatelessWidget {
+  
   Todo todo;
   int index;
-  TodoItem({super.key, required this.todo, required this.index});
+
+  TodoItem({
+    super.key,
+    required this.todo,
+    required this.index
+  });
 
   @override
   Widget build(BuildContext context) {

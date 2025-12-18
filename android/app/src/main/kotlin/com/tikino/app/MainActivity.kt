@@ -1,4 +1,4 @@
-package com.example.purple_do
+package com.tikino.app
 
 import io.flutter.embedding.android.FlutterActivity
 

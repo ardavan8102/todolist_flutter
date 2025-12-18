@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
-import 'package:purple_do/model/todo.dart';
-import 'package:purple_do/provider/todo_provider.dart';
-import 'package:purple_do/screens/homepage_screen.dart';
+import 'package:tikino/core/styles/app_theme.dart';
+import 'package:tikino/data/model/todo.dart';
+import 'package:tikino/data/provider/todo_provider.dart';
+import 'package:tikino/presentation/widgets/bottom_nav_bar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,6 +15,9 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TodoAdapter());
   await Hive.openBox<Todo>('todos');
+
+  // hide mobile's navbar menu
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
   // Run
   runApp(const MyApp());
@@ -25,13 +31,25 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => Todoprovider(),
       child: MaterialApp(
+
+        // localization
+        locale: const Locale('fa', 'IR'),
+        supportedLocales: const [
+          Locale('fa', 'IR')
+        ],
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate
+        ],
+
         debugShowCheckedModeBanner: false,
-        title: "Purple Do",
-        theme: ThemeData(
-          fontFamily: "IranSans",
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)
-        ),
-        home: const HomepageScreen(),
+
+        title: "Tikino",
+
+        theme: AppTheme.mainTheme,
+
+        home: CustomBottomNavigationBar(),
       ),
     );
   }
