@@ -22,7 +22,12 @@ class AppBarWithSearchBarAndAddButton extends StatelessWidget {
         // Add Task's Icon
         Expanded(
           flex: 1,
-          child: IconButtonWithInkWell(),
+          child: IconButtonWithInkWell(
+            function: () {
+              
+            },
+            icon: Icons.menu,
+          ),
         ),
       ],
     );

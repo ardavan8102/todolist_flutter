@@ -1,12 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tikino/core/consts/colors.dart';
-import 'package:tikino/presentation/widgets/todo_dialog.dart';
 
 class IconButtonWithInkWell extends StatelessWidget {
   const IconButtonWithInkWell({
-    super.key,
+    super.key, required this.function, required this.icon,
   });
+
+  final Function() function;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class IconButtonWithInkWell extends StatelessWidget {
       borderRadius: .circular(10),
       child: InkWell(
         borderRadius: .circular(10),
-        onTap: () => showDialog(context: context, builder: (_) => AddTodoDialog()),
+        onTap: function,
         splashColor: AppSolidColors.primary.withValues(alpha: .4),
         child: Container(
           height: 60,
@@ -28,7 +29,7 @@ class IconButtonWithInkWell extends StatelessWidget {
             ),
           ),
           child: Icon(
-            CupertinoIcons.add,
+            icon,
             size: 32,
           ),
         ),
