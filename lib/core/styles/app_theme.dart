@@ -6,7 +6,27 @@ class AppTheme {
   static ThemeData mainTheme = ThemeData(
 
     fontFamily: 'Dana',
-    scaffoldBackgroundColor: AppSolidColors.scaffoldBackground
+    scaffoldBackgroundColor: AppSolidColors.scaffoldBackground,
+
+
+    textTheme: TextTheme(
+
+
+      // titles
+      titleLarge: TextStyle(
+        fontSize: 25,
+        fontWeight: .w700,
+      ),
+
+
+
+      // labels
+      labelSmall: TextStyle(
+        fontSize: 14,
+        fontWeight: .w300
+      ),
+
+    ),
 
   );
 

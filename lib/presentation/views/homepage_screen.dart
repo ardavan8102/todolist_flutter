@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tikino/core/consts/colors.dart';
+import 'package:tikino/core/consts/strings.dart';
 import 'package:tikino/core/helpers/get_now_jalali_date.dart';
-import 'package:tikino/core/helpers/get_total_stats.dart';
-import 'package:tikino/data/model/grid_category_model.dart';
+import 'package:tikino/core/helpers/home_grid_navigation.dart';
 import 'package:tikino/data/provider/home_grid_item_provider.dart';
-import 'package:tikino/gen/assets.gen.dart';
-import 'package:tikino/presentation/widgets/cards/quick_stats_card.dart';
+import 'package:tikino/presentation/widgets/containers/home_page_top_background.dart';
+import 'package:tikino/presentation/widgets/containers/quick_stats_container.dart';
 
 class HomepageScreen extends StatelessWidget {
   const HomepageScreen({super.key});
@@ -24,18 +24,7 @@ class HomepageScreen extends StatelessWidget {
       children: [
         
         // page title's background
-        Container(
-          height: size.height * .3,
-          width: size.width,
-          decoration: BoxDecoration(
-            color: AppSolidColors.primary,
-            image: DecorationImage(
-              image: AssetImage(Assets.image.homeAppbarBg.path),
-              fit: BoxFit.cover,
-              opacity: .5,
-            ),
-          ),
-        ),
+        HomePageTopBackground(size: size),
     
         // page title
         Positioned(
@@ -48,8 +37,8 @@ class HomepageScreen extends StatelessWidget {
             children: [
               Text(
                 getNowJalaliDate(),
-                style: TextStyle(
-                  color: Colors.white.withValues(alpha: .6),
+                style: textTheme.labelSmall!.copyWith(
+                  color: Colors.white.withValues(alpha: .7)
                 ),
               ),
     
@@ -58,10 +47,8 @@ class HomepageScreen extends StatelessWidget {
               ),
     
               Text(
-                'بـه تیـکـیـنــو خـوش آمدیــد',
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: .bold,
+                AppStrings.homepageWelcomeText,
+                style: textTheme.titleLarge!.copyWith(
                   color: Colors.white
                 ),
               ),
@@ -80,7 +67,7 @@ class HomepageScreen extends StatelessWidget {
               children: [
             
                 // quick stats
-                quickStatsSection(size),
+                QuickStatsContainer(),
             
                 const SizedBox(height: 10),
             
@@ -105,29 +92,7 @@ class HomepageScreen extends StatelessWidget {
                             color: AppSolidColors.primary.withValues(alpha: .2),
                             borderRadius: .circular(16),
                             child: InkWell(
-                              onTap: () {
-                                if (item.action == HomeGridAction.openCalender) {
-                  
-                                  // TODO : open calendar page
-                  
-                                } else if (item.action == HomeGridAction.habitTracker) {
-                  
-                                  // TODO : Open habit tracker
-                  
-                                } else if (item.action == HomeGridAction.openHomeWorkPage) {
-                  
-                                  // TODO : Open homework page
-                  
-                                } else if (item.action == HomeGridAction.openOccasionPage) {
-                  
-                                  // TODO : Open Occasions page
-                  
-                                } else {
-                  
-                                  // TODO : Open countdowns oage
-                  
-                                }
-                              },
+                              onTap: () => homeGridNavigation(item),
                               splashColor: AppSolidColors.whiteBackground.withValues(alpha: .5),
                               borderRadius: .circular(16),
                               child: Container(
@@ -173,56 +138,4 @@ class HomepageScreen extends StatelessWidget {
       ],
     );
   }
-
-  Container quickStatsSection(Size size) {
-    return Container(
-      height: size.height * .3,
-      margin: const EdgeInsets.only(top: 40),
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          width: 1,
-          color: AppSolidColors.lightBorder,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            spacing: 20,
-            children: [
-              Expanded(
-                child: QuickStatsCardItem(
-                  bgColor: Colors.green,
-                  label: 'انجام شده',
-                  value: totalTaskStats.totalCompleted.toString(),
-                ),
-              ),
-
-              Expanded(
-                child: QuickStatsCardItem(
-                  bgColor: Colors.blueAccent,
-                  label: 'درحال انجام',
-                  value: activeTodosCount.toString(),
-                ),
-              ),
-            ],
-          ),
-
-          const SizedBox(height: 20),
-
-          QuickStatsCardItem(
-            bgColor: Colors.red.shade900,
-            label: 'کارهــای حذف شده',
-            value: totalTaskStats.totalDeleted.toString(),
-          ),
-        ],
-      ),
-    );
-  }
-
 }
