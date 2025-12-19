@@ -14,7 +14,7 @@ class AppNavBarPages {
     return [
         PersistentBottomNavBarItem(
             icon: Icon(CupertinoIcons.home),
-            title: ("Home"),
+            title: ("خــانه"),
             activeColorPrimary: AppSolidColors.accent,
             inactiveColorPrimary: CupertinoColors.systemGrey,
             routeAndNavigatorSettings: RouteAndNavigatorSettings(
@@ -29,7 +29,7 @@ class AppNavBarPages {
 
         PersistentBottomNavBarItem(
             icon: Icon(CupertinoIcons.doc_on_clipboard),
-            title: ("Tasks"),
+            title: ("کــارها"),
             activeColorPrimary: AppSolidColors.accent,
             inactiveColorPrimary: CupertinoColors.systemGrey,
             routeAndNavigatorSettings: RouteAndNavigatorSettings(
@@ -45,7 +45,7 @@ class AppNavBarPages {
         PersistentBottomNavBarItem(
             iconSize: 32,
             icon: Icon(CupertinoIcons.add, color: Colors.white),
-            title: ("Add"),
+            title: ("افــزودن"),
             activeColorPrimary: AppSolidColors.accent,
             inactiveColorPrimary: CupertinoColors.systemGrey,
             onPressed: (context) => showDialog(context: context!, builder: (_) => AddTodoDialog()),
@@ -53,7 +53,7 @@ class AppNavBarPages {
 
         PersistentBottomNavBarItem(
             icon: Icon(CupertinoIcons.chart_bar),
-            title: ("Stats"),
+            title: ("آمــار"),
             activeColorPrimary: AppSolidColors.accent,
             inactiveColorPrimary: CupertinoColors.systemGrey,
             routeAndNavigatorSettings: RouteAndNavigatorSettings(
@@ -68,7 +68,7 @@ class AppNavBarPages {
 
         PersistentBottomNavBarItem(
             icon: Icon(CupertinoIcons.list_dash),
-            title: ("Categories"),
+            title: ("دستـه هـا"),
             activeColorPrimary: AppSolidColors.accent,
             inactiveColorPrimary: CupertinoColors.systemGrey,
             routeAndNavigatorSettings: RouteAndNavigatorSettings(

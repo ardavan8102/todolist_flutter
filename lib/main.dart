@@ -6,6 +6,7 @@ import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:tikino/core/styles/app_theme.dart';
 import 'package:tikino/data/model/priority.dart';
+import 'package:tikino/data/model/statuses.dart';
 import 'package:tikino/data/model/todo.dart';
 import 'package:tikino/data/provider/todo_provider.dart';
 import 'package:tikino/presentation/widgets/bottom_nav_bar.dart';
@@ -18,8 +19,17 @@ void main() async {
 
   Hive.registerAdapter(TodoAdapter());
   Hive.registerAdapter(TodoPriorityAdapter());
+  Hive.registerAdapter(TodoStatsAdapter());
   
   await Hive.openBox<Todo>('todos');
+  await Hive.openBox<TodoStats>('stats');
+
+  if (Hive.box<TodoStats>('stats').isEmpty) {
+    Hive.box<TodoStats>('stats').put(
+      'global',
+      TodoStats()
+    );
+  }
 
   // hide mobile's navbar menu
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);

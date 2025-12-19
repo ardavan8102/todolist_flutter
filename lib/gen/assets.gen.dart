@@ -14,16 +14,19 @@ import 'package:flutter/widgets.dart';
 class $AssetsImageGen {
   const $AssetsImageGen();
 
+  /// File path: assets/image/home_appbar_bg.png
+  AssetGenImage get homeAppbarBg =>
+      const AssetGenImage('assets/image/home_appbar_bg.png');
+
   /// File path: assets/image/tikino.png
-  AssetGenImage get purpleDo =>
-      const AssetGenImage('assets/image/tikino.png');
+  AssetGenImage get tikino => const AssetGenImage('assets/image/tikino.png');
 
   /// File path: assets/image/tikino_transparent.png
-  AssetGenImage get purpleDoTransparent =>
+  AssetGenImage get tikinoTransparent =>
       const AssetGenImage('assets/image/tikino_transparent.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [purpleDo, purpleDoTransparent];
+  List<AssetGenImage> get values => [homeAppbarBg, tikino, tikinoTransparent];
 }
 
 class Assets {

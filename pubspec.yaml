@@ -41,7 +41,9 @@ flutter:
   assets:
     - assets/image/tikino_transparent.png
     - assets/image/tikino.png
+    - assets/image/home_appbar_bg.png
 
+    
   fonts:
     - family: Dana
       fonts:

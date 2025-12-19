@@ -15,11 +15,12 @@ class TodoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     final provider = Provider.of<Todoprovider>(context, listen: false);
     final color = Color(todo.colorValue);
 
     return Card(
-      margin: const EdgeInsets.all(20),
+      margin: const EdgeInsets.all(15),
       elevation: 0,
       child: ListTile(
         contentPadding: EdgeInsets.fromLTRB(12, 10, 12, 10),
