@@ -10,14 +10,15 @@ class AppBarWithSearchBarAndAddButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      spacing: 20,
-      mainAxisAlignment: .spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         // Search field
         Expanded(
           flex: 4,
           child: AppBarSearchTextField()
         ),
+
+        const SizedBox(width: 20),
     
         // Add Task's Icon
         Expanded(

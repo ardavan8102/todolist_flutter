@@ -42,7 +42,7 @@ class HomepageScreen extends StatelessWidget {
                         margin: EdgeInsets.only(top: 40),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: .circular(20),
+                          borderRadius: BorderRadius.circular(20),
                           border: Border.all(
                             width: 1,
                             color: AppSolidColors.lightBorder,

@@ -13,16 +13,16 @@ class IconButtonWithInkWell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: AppSolidColors.whiteBackground,
-      borderRadius: .circular(10),
+      borderRadius: BorderRadius.circular(10),
       child: InkWell(
-        borderRadius: .circular(10),
+        borderRadius: BorderRadius.circular(10),
         onTap: function,
         splashColor: AppSolidColors.primary.withValues(alpha: .4),
         child: Container(
           height: 60,
           width: 60,
           decoration: BoxDecoration(
-            borderRadius: .circular(10),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(
               width: 1,
               color: AppSolidColors.lightBorder,

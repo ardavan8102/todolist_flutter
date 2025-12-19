@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:tikino/core/styles/app_theme.dart';
+import 'package:tikino/data/model/priority.dart';
 import 'package:tikino/data/model/todo.dart';
 import 'package:tikino/data/provider/todo_provider.dart';
 import 'package:tikino/presentation/widgets/bottom_nav_bar.dart';
@@ -13,7 +15,10 @@ void main() async {
   
   // Initialize DB
   await Hive.initFlutter();
+
   Hive.registerAdapter(TodoAdapter());
+  Hive.registerAdapter(TodoPriorityAdapter());
+  
   await Hive.openBox<Todo>('todos');
 
   // hide mobile's navbar menu
@@ -38,6 +43,11 @@ class MyApp extends StatelessWidget {
           Locale('fa', 'IR')
         ],
         localizationsDelegates: const [
+          // calender & date picker
+          PersianMaterialLocalizations.delegate,
+          PersianCupertinoLocalizations.delegate,
+
+          // app
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate

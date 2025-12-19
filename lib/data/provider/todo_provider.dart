@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:tikino/data/model/priority.dart';
 import 'package:tikino/data/model/todo.dart';
 
 class Todoprovider extends ChangeNotifier {
@@ -11,8 +12,19 @@ class Todoprovider extends ChangeNotifier {
   List<Todo> get todos => _todoBox.values.toList();
 
   // Add Todo list Item functionallity
-  void addTodo(String title){
-    final todo = Todo(title: title);
+  void addTodo({
+    required String title,
+    required int colorValue,
+    required TodoPriority priority,
+    required DateTime? dueDate,
+  }){
+    final todo = Todo(
+      title: title,
+      colorValue: colorValue,
+      priority: priority,
+      dueDate: dueDate,
+
+    );
     _todoBox.add(todo);
     notifyListeners();
   }
