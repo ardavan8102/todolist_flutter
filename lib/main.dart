@@ -10,6 +10,7 @@ import 'package:tikino/data/model/for_providers/statuses.dart';
 import 'package:tikino/data/model/for_providers/todo.dart';
 import 'package:tikino/data/provider/category_provider.dart';
 import 'package:tikino/data/provider/home_grid_item_provider.dart';
+import 'package:tikino/data/provider/stats_provider.dart';
 import 'package:tikino/data/provider/todo_provider.dart';
 import 'package:tikino/presentation/widgets/bottom_nav_bar.dart';
 
@@ -57,6 +58,10 @@ class MyApp extends StatelessWidget {
 
         ChangeNotifierProvider(
           create: (_) => CategoryProvider(),
+        ),
+
+        ChangeNotifierProvider(
+          create: (_) => StatsProvider(),
         ),
       ],
       

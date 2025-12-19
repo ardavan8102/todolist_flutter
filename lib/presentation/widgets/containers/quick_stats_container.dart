@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tikino/core/consts/colors.dart';
-import 'package:tikino/core/helpers/get_total_stats.dart';
+import 'package:tikino/data/provider/stats_provider.dart';
 import 'package:tikino/presentation/widgets/cards/quick_stats_card.dart';
 
 class QuickStatsContainer extends StatelessWidget {
@@ -8,6 +9,8 @@ class QuickStatsContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final provider = context.watch<StatsProvider>();
 
     var size = MediaQuery.of(context).size;
     
@@ -35,7 +38,7 @@ class QuickStatsContainer extends StatelessWidget {
                 child: QuickStatsCardItem(
                   bgColor: Colors.green,
                   label: 'انجام شده',
-                  value: totalTaskStats.totalCompleted.toString(),
+                  value: provider.totalStats.totalCompleted.toString(),
                 ),
               ),
 
@@ -43,7 +46,7 @@ class QuickStatsContainer extends StatelessWidget {
                 child: QuickStatsCardItem(
                   bgColor: Colors.blueAccent,
                   label: 'درحال انجام',
-                  value: activeTodosCount.toString(),
+                  value: provider.activeTodosCount.toString(),
                 ),
               ),
             ],
@@ -54,7 +57,7 @@ class QuickStatsContainer extends StatelessWidget {
           QuickStatsCardItem(
             bgColor: Colors.red.shade900,
             label: 'کارهــای حذف شده',
-            value: totalTaskStats.totalDeleted.toString(),
+            value: provider.totalStats.totalDeleted.toString(),
           ),
         ],
       ),

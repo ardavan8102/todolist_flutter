@@ -8,9 +8,14 @@ import 'package:tikino/data/provider/home_grid_item_provider.dart';
 import 'package:tikino/presentation/widgets/containers/home_page_top_background.dart';
 import 'package:tikino/presentation/widgets/containers/quick_stats_container.dart';
 
-class HomepageScreen extends StatelessWidget {
+class HomepageScreen extends StatefulWidget {
   const HomepageScreen({super.key});
 
+  @override
+  State<HomepageScreen> createState() => _HomepageScreenState();
+}
+
+class _HomepageScreenState extends State<HomepageScreen> {
   @override
   Widget build(BuildContext context) {
     

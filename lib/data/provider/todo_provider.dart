@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:tikino/core/helpers/get_total_stats.dart';
 import 'package:tikino/data/model/for_providers/priority.dart';
 import 'package:tikino/data/model/for_providers/todo.dart';
+import 'package:tikino/data/provider/stats_provider.dart';
 
 class Todoprovider extends ChangeNotifier {
 
@@ -11,6 +11,10 @@ class Todoprovider extends ChangeNotifier {
 
   // Get All Todo list items from DB box
   List<Todo> get todos => _todoBox.values.toList();
+
+
+  // Stats provider for updating them
+  final stats = StatsProvider();
 
   // Add Todo list Item functionallity
   void addTodo({
@@ -41,8 +45,8 @@ class Todoprovider extends ChangeNotifier {
       todo.save();
 
       if (todo.isDone) {
-        totalTaskStats.totalCompleted += 1;
-        totalTaskStats.save();
+        stats.totalStats.totalCompleted += 1;
+        stats.totalStats.save();
       }
 
       notifyListeners();
@@ -53,8 +57,8 @@ class Todoprovider extends ChangeNotifier {
   void deleteTodo(int index){
     _todoBox.deleteAt(index);
 
-    totalTaskStats.totalDeleted += 1;
-    totalTaskStats.save();
+    stats.totalStats.totalDeleted += 1;
+    stats.totalStats.save();
 
     notifyListeners();
   }
