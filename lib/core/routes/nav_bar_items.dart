@@ -45,7 +45,7 @@ class AppNavBarPages {
         PersistentBottomNavBarItem(
             iconSize: 32,
             icon: Icon(CupertinoIcons.add, color: Colors.white),
-            title: ("افــزودن"),
+            title: ("کـار جدید"),
             activeColorPrimary: AppSolidColors.accent,
             inactiveColorPrimary: CupertinoColors.systemGrey,
             onPressed: (context) => showDialog(context: context!, builder: (_) => AddTodoDialog()),

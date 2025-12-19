@@ -20,6 +20,7 @@ dependencies:
   persistent_bottom_nav_bar: ^6.2.1
   provider: ^6.1.5+1
   shamsi_date: ^1.1.1
+  uuid: ^4.5.2
 
 dev_dependencies:
   build_runner: ^2.4.6
@@ -43,7 +44,6 @@ flutter:
     - assets/image/tikino.png
     - assets/image/home_appbar_bg.png
 
-    
   fonts:
     - family: Dana
       fonts:

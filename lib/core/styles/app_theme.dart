@@ -21,6 +21,16 @@ class AppTheme {
 
 
       // labels
+      labelLarge: TextStyle(
+        fontSize: 18,
+        fontWeight: .w500
+      ),
+
+      labelMedium: TextStyle(
+        fontSize: 16,
+        fontWeight: .w400
+      ),
+      
       labelSmall: TextStyle(
         fontSize: 14,
         fontWeight: .w300

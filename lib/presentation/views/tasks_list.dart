@@ -13,8 +13,11 @@ class TasksListPage extends StatelessWidget {
     final todoProvider = Provider.of<Todoprovider>(context);
 
     return SafeArea(
-      child: Center(
-        child: TasksListView(todoProvider: todoProvider)
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Center(
+          child: TasksListView(todoProvider: todoProvider)
+        ),
       )
     );
   }

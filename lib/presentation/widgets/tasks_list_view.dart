@@ -27,7 +27,7 @@ class TasksListView extends StatelessWidget {
         const SizedBox(height: 16),
 
         Container(
-          height: size.height * .35,
+          height: size.height * .7,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
