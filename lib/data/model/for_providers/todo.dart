@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:tikino/data/model/priority.dart';
+import 'package:tikino/data/model/for_providers/priority.dart';
 
 part 'todo.g.dart';
 

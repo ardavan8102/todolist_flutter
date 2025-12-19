@@ -5,9 +5,10 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:tikino/core/styles/app_theme.dart';
-import 'package:tikino/data/model/priority.dart';
-import 'package:tikino/data/model/statuses.dart';
-import 'package:tikino/data/model/todo.dart';
+import 'package:tikino/data/model/for_providers/priority.dart';
+import 'package:tikino/data/model/for_providers/statuses.dart';
+import 'package:tikino/data/model/for_providers/todo.dart';
+import 'package:tikino/data/provider/home_grid_item_provider.dart';
 import 'package:tikino/data/provider/todo_provider.dart';
 import 'package:tikino/presentation/widgets/bottom_nav_bar.dart';
 
@@ -43,8 +44,17 @@ class MyApp extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => Todoprovider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => Todoprovider(),
+        ),
+
+        ChangeNotifierProvider(
+          create: (_) => HomeGridProvider(),
+        ),
+      ],
+      
       child: MaterialApp(
 
         // localization

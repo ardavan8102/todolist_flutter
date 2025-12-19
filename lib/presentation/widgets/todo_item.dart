@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tikino/data/model/todo.dart';
+import 'package:tikino/data/model/for_providers/todo.dart';
 import 'package:tikino/data/provider/todo_provider.dart';
 import 'package:tikino/presentation/widgets/icon_buttons/check_box_task_done.dart';
 import 'package:tikino/presentation/widgets/icon_buttons/delete_task.dart';

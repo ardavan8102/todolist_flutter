@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:tikino/core/helpers/convert_date_to_shamsi.dart';
-import 'package:tikino/data/model/priority.dart';
+import 'package:tikino/data/model/for_providers/priority.dart';
 import 'package:tikino/data/provider/todo_provider.dart';
 import 'package:tikino/presentation/widgets/textfields/add_todo/dialog_text_fields.dart';
 

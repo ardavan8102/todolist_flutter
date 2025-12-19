@@ -3,111 +3,174 @@ import 'package:provider/provider.dart';
 import 'package:tikino/core/consts/colors.dart';
 import 'package:tikino/core/helpers/get_now_jalali_date.dart';
 import 'package:tikino/core/helpers/get_total_stats.dart';
-import 'package:tikino/data/provider/todo_provider.dart';
+import 'package:tikino/data/model/grid_category_model.dart';
+import 'package:tikino/data/provider/home_grid_item_provider.dart';
 import 'package:tikino/gen/assets.gen.dart';
 import 'package:tikino/presentation/widgets/cards/quick_stats_card.dart';
-import 'package:tikino/presentation/widgets/containers/circle_overlay.dart';
-import 'package:tikino/presentation/widgets/todo_item.dart';
 
 class HomepageScreen extends StatelessWidget {
   const HomepageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-
-    final todoProvider = Provider.of<Todoprovider>(context);
     
     var size = MediaQuery.of(context).size;
     
     var textTheme = Theme.of(context).textTheme;
 
-    return SizedBox(
-      height: size.height,
-      width: size.width,
-      child: Stack(
-        children: [
-    
-          // page title's background
-          Container(
-            height: size.height * .3,
-            width: size.width,
-            decoration: BoxDecoration(
-              color: AppSolidColors.primary,
-              image: DecorationImage(
-                image: AssetImage(Assets.image.homeAppbarBg.path),
-                fit: BoxFit.cover,
-                opacity: .5,
-              ),
+    final gridItems = context.watch<HomeGridProvider>().items;
+
+    return Stack(
+      children: [
+        
+        // page title's background
+        Container(
+          height: size.height * .3,
+          width: size.width,
+          decoration: BoxDecoration(
+            color: AppSolidColors.primary,
+            image: DecorationImage(
+              image: AssetImage(Assets.image.homeAppbarBg.path),
+              fit: BoxFit.cover,
+              opacity: .5,
             ),
           ),
-
-          // page titles
-          Positioned(
-            left: 0,
-            right: 0,
-            top: 50,
+        ),
+    
+        // page title
+        Positioned(
+          left: 0,
+          right: 0,
+          top: 50,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                getNowJalaliDate(),
+                style: TextStyle(
+                  color: Colors.white.withValues(alpha: .6),
+                ),
+              ),
+    
+              const SizedBox(
+                height: 16,
+              ),
+    
+              Text(
+                'بـه تیـکـیـنــو خـوش آمدیــد',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: .bold,
+                  color: Colors.white
+                ),
+              ),
+            ],
+          ),
+        ),
+        
+        Positioned(
+          left: 0,
+          right: 0,
+          top: size.height * .1,
+          bottom: 0,
+          child: Padding(
+            padding: const EdgeInsets.all(24),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  getNowJalaliDate(),
-                  style: TextStyle(
-                    color: Colors.white.withValues(alpha: .6),
+            
+                // quick stats
+                quickStatsSection(size),
+            
+                const SizedBox(height: 10),
+            
+                // Content
+                Expanded(
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: 0.8
+                    ),
+                    itemCount: gridItems.length,
+                    itemBuilder: (context, index) {
+                      
+                      final item = gridItems[index];
+                  
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Material(
+                            color: AppSolidColors.primary.withValues(alpha: .2),
+                            borderRadius: .circular(16),
+                            child: InkWell(
+                              onTap: () {
+                                if (item.action == HomeGridAction.openCalender) {
+                  
+                                  // TODO : open calendar page
+                  
+                                } else if (item.action == HomeGridAction.habitTracker) {
+                  
+                                  // TODO : Open habit tracker
+                  
+                                } else if (item.action == HomeGridAction.openHomeWorkPage) {
+                  
+                                  // TODO : Open homework page
+                  
+                                } else if (item.action == HomeGridAction.openOccasionPage) {
+                  
+                                  // TODO : Open Occasions page
+                  
+                                } else {
+                  
+                                  // TODO : Open countdowns oage
+                  
+                                }
+                              },
+                              splashColor: AppSolidColors.whiteBackground.withValues(alpha: .5),
+                              borderRadius: .circular(16),
+                              child: Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  borderRadius: .circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withValues(alpha: .05),
+                                      blurRadius: 10
+                                    ),
+                                  ],
+                                ),
+                                child: SizedBox(
+                                  height: 48,
+                                  width: 48,
+                                  child: item.icon,
+                                ),
+                              ),
+                            ),
+                          ),
+                                      
+                          const SizedBox(height: 10),
+                                      
+                          Text(
+                            item.title,
+                            style: TextStyle(
+                              fontWeight: .bold,
+                              color: AppSolidColors.primary
+                            ),
+                            textAlign: .center,
+                          )
+                        ],
+                      );
+                  
+                    },
                   ),
-                ),
-
-                const SizedBox(
-                  height: 16,
-                ),
-
-                Text(
-                  'بـه تیـکـیـنــو خـوش آمدیــد',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: .bold,
-                    color: Colors.white
-                  ),
-                ),
+                )
               ],
             ),
           ),
-    
-          Positioned(
-            left: 0,
-            right: 0,
-            top: size.height * .1,
-            bottom: 0,
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                children: [
-              
-                  // quick stats
-                  quickStatsSection(size),
-              
-                  const SizedBox(height: 40),
-              
-                  // Content
-                  Expanded(
-                    child: NestedScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      headerSliverBuilder: (context, innerBoxIsScrolled) {
-                        return [
-                          SliverToBoxAdapter(
-                            child: todoListColumn(size, todoProvider),
-                          )
-                        ];
-                      },
-                      body: Column(),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -162,41 +225,4 @@ class HomepageScreen extends StatelessWidget {
     );
   }
 
-  Column todoListColumn(Size size, Todoprovider todoProvider) {
-    return Column(
-      children: [
-        Text(
-          'لیســت کــارهای مــن',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: AppSolidColors.accent
-          ),
-        ),
-    
-        const SizedBox(height: 16),
-    
-        Container(
-          height: size.height * .35,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              width: 1,
-              color: AppSolidColors.lightBorder,
-            ),
-          ),
-          child: ListView.builder(
-            shrinkWrap: true,
-            physics: const ClampingScrollPhysics(),
-            itemCount: todoProvider.todos.length,
-            itemBuilder: (context, index){
-              final todo = todoProvider.todos[index];
-              return TodoItem(todo: todo, index: index);
-            }
-          ),
-        ),
-      ],
-    );
-  }
 }

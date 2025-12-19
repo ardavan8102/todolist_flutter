@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
-import 'package:tikino/data/model/statuses.dart';
-import 'package:tikino/data/model/todo.dart';
+import 'package:tikino/data/model/for_providers/statuses.dart';
+import 'package:tikino/data/model/for_providers/todo.dart';
 
 // get total (permanent) data
 TodoStats get totalTaskStats => Hive.box<TodoStats>('stats').get('global')!;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:tikino/core/helpers/get_total_stats.dart';
-import 'package:tikino/data/model/priority.dart';
-import 'package:tikino/data/model/todo.dart';
+import 'package:tikino/data/model/for_providers/priority.dart';
+import 'package:tikino/data/model/for_providers/todo.dart';
 
 class Todoprovider extends ChangeNotifier {
 
