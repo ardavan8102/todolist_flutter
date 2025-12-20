@@ -38,7 +38,7 @@ class QuickStatsContainer extends StatelessWidget {
                 child: QuickStatsCardItem(
                   bgColor: Colors.green,
                   label: 'انجام شده',
-                  value: provider.totalStats.totalCompleted.toString(),
+                  value: provider.completedTodosCount.toString(),
                 ),
               ),
 
@@ -57,7 +57,7 @@ class QuickStatsContainer extends StatelessWidget {
           QuickStatsCardItem(
             bgColor: Colors.red.shade900,
             label: 'کارهــای حذف شده',
-            value: provider.totalStats.totalDeleted.toString(),
+            value: provider.deletedTodosCount.toString(),
           ),
         ],
       ),

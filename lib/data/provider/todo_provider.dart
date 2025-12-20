@@ -13,11 +13,19 @@ class Todoprovider extends ChangeNotifier {
   List<Todo> get todos => _todoBox.values.toList();
 
 
-  // incompelete tasks
-  List<Todo> get undoneTodoList => todos.where((todo) => !todo.isDone).toList();
+  List<Todo> get undoneTodoList =>
+    todos
+        .where((t) => !t.isDone && !t.isDeleted)
+        .toList();
 
-  // compeleted tasks
-  List<Todo> get doneTodoList => todos.where((todo) => todo.isDone).toList();
+  List<Todo> get doneTodoList =>
+      todos
+          .where((t) => t.isDone && !t.isDeleted)
+          .toList();
+
+  List<Todo> get deletedTodoList =>
+      todos.where((t) => t.isDeleted).toList();
+
 
   // Stats provider for updating them
   final stats = StatsProvider();
@@ -42,24 +50,21 @@ class Todoprovider extends ChangeNotifier {
 
   // Change Item Status functionallity
   void toggleTodo(Todo todo) {
+    
     todo.isDone = !todo.isDone;
 
     todo.save();
-
-    if (todo.isDone) {
-      stats.totalStats.totalCompleted += 1;
-    } else {
-      stats.totalStats.totalCompleted -= 1;
-    }
 
     notifyListeners();
   }
 
   // Remove Todo list Item functionallity
-  void deleteTodo(Todo todo) {
-    todo.delete();
-    todos.remove(todo);
-    stats.totalStats.totalDeleted += 1;
+  void deleteTodo(Todo todo) async {
+
+    todo.isDeleted = true;
+
+    todo.save();
+    
     notifyListeners();
   }
 

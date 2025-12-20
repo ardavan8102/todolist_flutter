@@ -31,9 +31,13 @@ class Todo extends HiveObject {
   @HiveField(7)
   int iconCodePoint;
 
+  @HiveField(8)
+  bool isDeleted;
+
   Todo({
     required this.title,
     this.isDone = false,
+    this.isDeleted = false,
     DateTime? createdAt,
     this.dueDate,
     this.priority = TodoPriority.medium,

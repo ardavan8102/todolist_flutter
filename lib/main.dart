@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'package:tikino/core/styles/app_theme.dart';
 import 'package:tikino/data/model/for_providers/category.dart';
 import 'package:tikino/data/model/for_providers/priority.dart';
-import 'package:tikino/data/model/for_providers/statuses.dart';
 import 'package:tikino/data/model/for_providers/todo.dart';
 import 'package:tikino/data/provider/category_provider.dart';
 import 'package:tikino/data/provider/home_grid_item_provider.dart';
@@ -25,19 +24,10 @@ void main() async {
 
   Hive.registerAdapter(TodoAdapter());
   Hive.registerAdapter(TodoPriorityAdapter());
-  Hive.registerAdapter(TodoStatsAdapter());
   Hive.registerAdapter(CategoryModelAdapter());
   
   await Hive.openBox<Todo>('todos');
-  await Hive.openBox<TodoStats>('stats');
   await Hive.openBox<CategoryModel>('categories');
-
-  if (Hive.box<TodoStats>('stats').isEmpty) {
-    Hive.box<TodoStats>('stats').put(
-      'global',
-      TodoStats()
-    );
-  }
 
   // hide mobile's navbar menu
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
