@@ -27,7 +27,7 @@ class TasksListView extends StatelessWidget {
         const SizedBox(height: 16),
 
         Container(
-          height: size.height * .7,
+          height: size.height * .4,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
@@ -39,10 +39,47 @@ class TasksListView extends StatelessWidget {
           child: ListView.builder(
             shrinkWrap: true,
             physics: const ClampingScrollPhysics(),
-            itemCount: todoProvider.todos.length,
+            itemCount: todoProvider.undoneTodoList.length,
             itemBuilder: (context, index){
-              final todo = todoProvider.todos[index];
-              return TodoItem(todo: todo, index: index);
+              final todo = todoProvider.undoneTodoList[index];
+
+              return TodoItem(todo: todo);
+            }
+          ),
+        ),
+
+        const SizedBox(height: 40),
+
+        // compeleted tasks
+        Text(
+          'کارهای انجام شده',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: AppSolidColors.accent
+          ),
+        ),
+
+        const SizedBox(height: 16),
+
+        Container(
+          height: size.height * .25,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              width: 1,
+              color: AppSolidColors.lightBorder,
+            ),
+          ),
+          child: ListView.builder(
+            shrinkWrap: true,
+            physics: const ClampingScrollPhysics(),
+            itemCount: todoProvider.doneTodoList.length,
+            itemBuilder: (context, index){
+              final todo = todoProvider.doneTodoList[index];
+
+              return TodoItem(todo: todo);
             }
           ),
         ),

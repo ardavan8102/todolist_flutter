@@ -24,11 +24,18 @@ class _AddNewCategoryPageState extends State<AddNewCategoryPage> {
   final TextEditingController _titleEditingController = TextEditingController();
 
   IconData? selectedIcon;
+  
   Color? selectedColor;
 
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _titleEditingController.dispose();
   }
 
   @override

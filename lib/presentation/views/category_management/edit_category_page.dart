@@ -26,6 +26,7 @@ class _EditCategoryPageState extends State<EditCategoryPage> {
   final TextEditingController _titleEditingController = TextEditingController();
 
   late IconData selectedIcon;
+
   late Color selectedColor;
 
   @override
@@ -35,6 +36,12 @@ class _EditCategoryPageState extends State<EditCategoryPage> {
     _titleEditingController.text = widget.selectedCategory.title;
     selectedIcon = widget.selectedCategory.icon;
     selectedColor = widget.selectedCategory.color;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _titleEditingController.dispose();
   }
 
   @override

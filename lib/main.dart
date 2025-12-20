@@ -15,7 +15,7 @@ import 'package:tikino/data/provider/stats_provider.dart';
 import 'package:tikino/data/provider/todo_provider.dart';
 import 'package:tikino/presentation/widgets/bottom_nav_bar.dart';
 
-final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(); // --> key for bottom navbar navigation
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

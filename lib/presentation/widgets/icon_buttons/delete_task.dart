@@ -1,33 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tikino/data/model/for_providers/todo.dart';
 import 'package:tikino/data/provider/todo_provider.dart';
 
 class DeleteTaskIconButton extends StatelessWidget {
+  final Todo todo;
+  final Color color;
+
   const DeleteTaskIconButton({
     super.key,
-    required this.provider,
-    required this.index,
+    required this.todo,
     required this.color,
   });
 
-  final Todoprovider provider;
-  final int index;
-  final Color color;
-
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => provider.deleteTodo(index),
-      child: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: color.withValues(alpha: .3),
-          borderRadius: BorderRadius.circular(10)
-        ),
-        child: Icon(
-          Icons.delete,
-          color: color,
-        ),
-      ),
+    final provider = context.read<Todoprovider>();
+
+    return IconButton(
+      icon: Icon(Icons.delete, color: color),
+      onPressed: () {
+        provider.deleteTodo(todo);
+      },
     );
   }
 }

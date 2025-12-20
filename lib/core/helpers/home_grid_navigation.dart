@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:tikino/data/model/grid_category_model.dart';
 import 'package:tikino/features/calendar/calendar_page.dart';
+import 'package:tikino/presentation/widgets/snackbars/custom_toast.dart';
 
 void homeGridNavigation(HomeGridItem item, BuildContext context){
 
@@ -14,13 +15,11 @@ void homeGridNavigation(HomeGridItem item, BuildContext context){
 
     // TODO : Open habit tracker
 
-  } else if (item.action == HomeGridAction.openHomeWorkPage) {
+  } else if (item.action == HomeGridAction.openHomeWorkPage || item.action == HomeGridAction.openOccasionPage) {
 
-    // TODO : Open homework page
-
-  } else if (item.action == HomeGridAction.openOccasionPage) {
-
-    // TODO : Open Occasions page
+    showCustomToast(
+      text: 'منتظر آپدیت های ما باشید ...',
+    );
 
   } else {
 

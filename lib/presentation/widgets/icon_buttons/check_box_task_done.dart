@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tikino/data/model/for_providers/todo.dart';
 import 'package:tikino/data/provider/todo_provider.dart';
 
 class IsTaskDoneCheckBoxButton extends StatelessWidget {
+  final Todo todo;
+  final Color color;
+
   const IsTaskDoneCheckBoxButton({
     super.key,
-    required this.color,
     required this.todo,
-    required this.provider,
-    required this.index,
+    required this.color,
   });
-
-  final Color color;
-  final Todo todo;
-  final Todoprovider provider;
-  final int index;
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.read<Todoprovider>();
+
     return Checkbox(
-      activeColor: color,
       value: todo.isDone,
-      onChanged: (_) => provider.toggleTodoStatus(index),
+      activeColor: color,
+      onChanged: (_) {
+        provider.toggleTodo(todo);
+      },
     );
   }
 }
