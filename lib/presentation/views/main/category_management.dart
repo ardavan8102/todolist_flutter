@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tikino/core/consts/colors.dart';
 import 'package:tikino/data/provider/category_provider.dart';
+import 'package:tikino/presentation/views/category_management/edit_category_page.dart';
+import 'package:tikino/presentation/widgets/appbars/appbar_with_actions.dart';
 import 'package:tikino/presentation/widgets/buttons/floating_button.dart';
 import 'package:tikino/presentation/widgets/texts/section_title.dart';
 
@@ -10,68 +12,64 @@ class CategoryManagementPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final provider = context.watch<CategoryProvider>();
 
-    var size = MediaQuery.of(context).size;
+    //final size = MediaQuery.of(context).size;
 
-    var textTheme = Theme.of(context).textTheme;
+    final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppSolidColors.primary,
-        title: Text('دسته بندی ها', style: TextStyle(color: Colors.white)),
-        automaticallyImplyLeading: false,
+      appBar: AppBarWithActionButtons(
+        bgColor: AppSolidColors.primary,
+        title: 'دسته بندی ها',
+        actions: const [],
       ),
+
       floatingActionButton: ExtendedFloatingButton(
         text: 'دسته جدید',
         icon: Icons.add,
+        function: () {
+          // TODO: navigate to AddCategoryPage
+        },
       ),
+
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
-            crossAxisAlignment: .start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-      
-              // management list
-              SectionTitle(title: 'مدیریت دسته ها'),
-      
+              const SectionTitle(title: 'مدیریت دسته ها'),
               const SizedBox(height: 15),
-      
-              SizedBox(
-                width: size.width,
-                height: size.height * .6,
+
+              Expanded(
                 child: ListView.builder(
                   itemCount: provider.categories.length,
                   itemBuilder: (context, index) {
-                    
                     final category = provider.categories[index];
-                
+
                     return Container(
-                      width: size.width,
-                      height: size.height * .08,
                       margin: index != provider.categories.length - 1
-                        ? const EdgeInsets.only(bottom: 20)
-                        : .zero,
+                          ? const EdgeInsets.only(bottom: 20)
+                          : EdgeInsets.zero,
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
-                        color: category.color.withValues(alpha: .2),
-                        borderRadius: .circular(15),
-                        border: Border.all(width: 1, color: category.color)
+                        color: category.color.withValues(alpha: .15),
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(
+                          width: 1,
+                          color: category.color,
+                        ),
                       ),
                       child: Row(
-                        crossAxisAlignment: .center,
-                        mainAxisAlignment: .spaceBetween,
                         children: [
-      
-                          // icon
+                          // icon box
                           Container(
-                            height: size.height * .05,
-                            width: size.height * .05,
+                            height: 44,
+                            width: 44,
                             decoration: BoxDecoration(
                               color: category.color,
-                              borderRadius: .circular(10)
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: Icon(
                               category.icon,
@@ -79,38 +77,44 @@ class CategoryManagementPage extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
-      
+
                           const SizedBox(width: 12),
-      
+
                           Expanded(
                             child: Row(
-                              mainAxisAlignment: .spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   category.title,
                                   style: textTheme.labelSmall!.copyWith(
-                                    fontWeight: .bold,
-                                    color: category.color
+                                    fontWeight: FontWeight.bold,
+                                    color: category.color,
                                   ),
                                 ),
-                            
+
                                 GestureDetector(
                                   onTap: () {
-                                    
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => EditCategoryPage(
+                                          selectedCategory: category,
+                                        ),
+                                      ),
+                                    );
                                   },
                                   child: Icon(
-                                    Icons.edit_document,
+                                    Icons.edit,
                                     color: category.color,
-                                    size: 24,
+                                    size: 22,
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
                         ],
                       ),
                     );
-                
                   },
                 ),
               ),

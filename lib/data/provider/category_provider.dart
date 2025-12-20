@@ -1,63 +1,49 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tikino/data/model/category_model.dart';
+import 'package:hive/hive.dart';
+import 'package:tikino/data/model/for_providers/category.dart';
 import 'package:uuid/uuid.dart';
 
 class CategoryProvider extends ChangeNotifier {
+  final Box<CategoryModel> _box =
+      Hive.box<CategoryModel>('categories');
 
-  final List<CategoryModel> _categories = [
+  List<CategoryModel> _categories = [];
 
-    CategoryModel(
-      id: const Uuid().v4(),
-      title: 'کار یا پروژه', 
-      icon: CupertinoIcons.briefcase,
-      color: Colors.orange
-    ),
+  List<CategoryModel> get categories => List.unmodifiable(_categories);
 
-    CategoryModel(
-      id: const Uuid().v4(),
-      title: 'درس خوندن', 
-      icon: CupertinoIcons.book,
-      color: Colors.blue
-    ),
+  CategoryProvider() {
+    _loadCategories();
+  }
 
-    CategoryModel(
-      id: const Uuid().v4(),
-      title: 'سرگرمی', 
-      icon: CupertinoIcons.briefcase,
-      color: Colors.red
-    ),
-
-  ];
-
-
-  List<CategoryModel> get categories => _categories;
-
-
-
-  void addCategory(CategoryModel category){
-
-    _categories.add(category);
+  void _loadCategories() {
+    _categories = _box.values.toList();
     notifyListeners();
-
   }
 
-  void updateCategory(String id, CategoryModel updated) {
+  Future<void> addCategory(
+    String title,
+    IconData icon,
+    Color color,
+  ) async {
+    final category = CategoryModel(
+      id: const Uuid().v4(),
+      title: title,
+      iconCodePoint: icon.codePoint,
+      colorValue: color.toARGB32(),
+    );
 
-    final index = _categories.indexWhere((category) => category.id == id);
-
-    if (index != -1) {
-      _categories[index] = updated;
-      notifyListeners();
-    }
-
+    await _box.put(category.id, category);
+    _loadCategories();
   }
 
-  void deleteCategory(String id) {
-
-    _categories.removeWhere((category) => category.id == id);
-    notifyListeners();
-
+  Future<void> updateCategory(CategoryModel updated) async {
+    await updated.save();
+    _loadCategories();
   }
 
+  Future<void> deleteCategory(String id) async {
+    await _box.delete(id);
+    _loadCategories();
+  }
 }

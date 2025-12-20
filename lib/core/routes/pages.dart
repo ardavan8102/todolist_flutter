@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tikino/presentation/views/category_management.dart';
-import 'package:tikino/presentation/views/homepage_screen.dart';
-import 'package:tikino/presentation/views/stats_page.dart';
-import 'package:tikino/presentation/views/tasks_list.dart';
+import 'package:tikino/presentation/views/main/category_management.dart';
+import 'package:tikino/presentation/views/main/homepage_screen.dart';
+import 'package:tikino/presentation/views/main/stats_page.dart';
+import 'package:tikino/presentation/views/main/tasks_list.dart';
 
 class AppPages {
 

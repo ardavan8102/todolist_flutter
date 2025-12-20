@@ -16,11 +16,15 @@ class AddTodoTextFieldCustom extends StatelessWidget {
       style: TextStyle(fontWeight: FontWeight.w300, color: Colors.black),
       textAlign: TextAlign.right,
       controller: controller,
-      autofocus: true,
+      autofocus: false,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey.shade400, width: 1.0),
+          borderSide: BorderSide(color: Colors.grey.shade500, width: 1.0),
           borderRadius: BorderRadius.circular(18),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey.shade300, width: 1.0),
+          borderRadius: BorderRadius.circular(12),
         ),
         hintText: hintText,
         hintStyle: TextStyle(

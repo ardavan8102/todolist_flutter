@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:tikino/core/consts/colors.dart';
-import 'package:tikino/presentation/views/category_management.dart';
-import 'package:tikino/presentation/views/homepage_screen.dart';
-import 'package:tikino/presentation/views/stats_page.dart';
-import 'package:tikino/presentation/views/tasks_list.dart';
+import 'package:tikino/presentation/views/main/category_management.dart';
+import 'package:tikino/presentation/views/main/homepage_screen.dart';
+import 'package:tikino/presentation/views/main/stats_page.dart';
+import 'package:tikino/presentation/views/main/tasks_list.dart';
 import 'package:tikino/presentation/widgets/todo_dialog.dart';
 
 class AppNavBarPages {
