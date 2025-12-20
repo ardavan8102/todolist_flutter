@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tikino/core/consts/colors.dart';
+import 'package:tikino/data/model/for_providers/category.dart';
 import 'package:tikino/data/provider/category_provider.dart';
+import 'package:tikino/presentation/views/category_management/add_new_category.dart';
 import 'package:tikino/presentation/views/category_management/edit_category_page.dart';
 import 'package:tikino/presentation/widgets/appbars/appbar_with_actions.dart';
 import 'package:tikino/presentation/widgets/buttons/floating_button.dart';
@@ -29,7 +31,9 @@ class CategoryManagementPage extends StatelessWidget {
         text: 'دسته جدید',
         icon: Icons.add,
         function: () {
-          // TODO: navigate to AddCategoryPage
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => AddNewCategoryPage())
+          );
         },
       ),
 
@@ -46,6 +50,7 @@ class CategoryManagementPage extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: provider.categories.length,
                   itemBuilder: (context, index) {
+
                     final category = provider.categories[index];
 
                     return Container(
@@ -92,22 +97,55 @@ class CategoryManagementPage extends StatelessWidget {
                                   ),
                                 ),
 
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) => EditCategoryPage(
-                                          selectedCategory: category,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: Icon(
-                                    Icons.edit,
+                                // manage button
+                                PopupMenuButton<_CategoryMenuAction>(
+                                  icon: Icon(
+                                    Icons.more_vert,
                                     color: category.color,
-                                    size: 22,
                                   ),
+                                  onSelected: (value) {
+                                    switch (value) {
+                                      case _CategoryMenuAction.edit:
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => EditCategoryPage(
+                                              selectedCategory: category,
+                                            ),
+                                          ),
+                                        );
+                                        break;
+
+                                      case _CategoryMenuAction.delete:
+                                        _showDeleteDialog(context, category, provider);
+                                        break;
+                                    }
+                                  },
+                                  itemBuilder: (context) => [
+                                    const PopupMenuItem(
+                                      value: _CategoryMenuAction.edit,
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.edit, size: 18),
+                                          SizedBox(width: 8),
+                                          Text('ویرایش'),
+                                        ],
+                                      ),
+                                    ),
+                                    const PopupMenuItem(
+                                      value: _CategoryMenuAction.delete,
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.delete, size: 18, color: Colors.red),
+                                          SizedBox(width: 8),
+                                          Text(
+                                            'حذف',
+                                            style: TextStyle(color: Colors.red),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -124,4 +162,36 @@ class CategoryManagementPage extends StatelessWidget {
       ),
     );
   }
+
+  void _showDeleteDialog(BuildContext context, CategoryModel category, CategoryProvider provider) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('حذف دسته'),
+        content: Text('آیا از حذف "${category.title}" مطمئنی؟'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('انصراف'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(dialogContext);
+              provider.deleteCategory(category.id);
+            },
+            child: const Text(
+              'حذف',
+              style: TextStyle(color: Colors.red),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+}
+
+enum _CategoryMenuAction {
+  edit,
+  delete,
 }

@@ -1,0 +1,123 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tikino/core/consts/colors.dart';
+import 'package:tikino/data/lists/category_data.dart';
+import 'package:tikino/data/provider/category_provider.dart';
+import 'package:tikino/presentation/widgets/appbars/appbar_with_actions.dart';
+import 'package:tikino/presentation/widgets/buttons/full_width_update_button.dart';
+import 'package:tikino/presentation/widgets/list_views/category_colors_list_view.dart';
+import 'package:tikino/presentation/widgets/list_views/category_icon_picker_list.dart';
+import 'package:tikino/presentation/widgets/textfields/add_todo/dialog_text_fields.dart';
+import 'package:tikino/presentation/widgets/texts/section_title.dart';
+
+class AddNewCategoryPage extends StatefulWidget {
+  const AddNewCategoryPage({
+    super.key,
+  });
+
+  @override
+  State<AddNewCategoryPage> createState() => _AddNewCategoryPageState();
+}
+
+class _AddNewCategoryPageState extends State<AddNewCategoryPage> {
+
+  final TextEditingController _titleEditingController = TextEditingController();
+
+  IconData? selectedIcon;
+  Color? selectedColor;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = context.read<CategoryProvider>();
+    final size = MediaQuery.of(context).size;
+
+    return Scaffold(
+      appBar: AppBarWithActionButtons(
+        bgColor: selectedColor ?? AppSolidColors.primary,
+        title: 'افزودن دسته جدید',
+        actions: [
+          GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: const Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(width: 20),
+        ],
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SectionTitle(title: 'نام دسته بندی'),
+              const SizedBox(height: 12),
+
+              AddTodoTextFieldCustom(
+                hintText: 'عنوان دسته را وارد کنید',
+                controller: _titleEditingController,
+              ),
+
+              const SizedBox(height: 30),
+
+              const SectionTitle(title: 'انتخاب آیکون'),
+              const SizedBox(height: 12),
+
+              SizedBox(
+                height: size.height * .08,
+                child: CategoryIconPicker(
+                  selectedIcon: selectedIcon ?? categoryIcons[0],
+                  selectedColor: selectedColor ?? categoryColors[0],
+                  onSelect: (icon) {
+                    setState(() {
+                      selectedIcon = icon;
+                    });
+                  },
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              const SectionTitle(title: 'انتخاب رنگ'),
+              const SizedBox(height: 12),
+
+              SizedBox(
+                height: size.height * .08,
+                child: CategoryColorsListView(
+                  selectedColor: selectedColor,
+                  onSelect: (color) {
+                    setState(() {
+                      selectedColor = color;
+                    });
+                  },
+                ),
+              ),
+
+              SizedBox(height: size.height * .1),
+
+              FullWidthUpdateCategoryElevatedButton(
+                selectedColor: selectedColor ?? AppSolidColors.primary,
+                function: () {
+                  provider.addCategory(
+                    _titleEditingController.text.trim(),
+                    selectedIcon ?? categoryIcons[0],
+                    selectedColor ?? AppSolidColors.primary
+                  );
+
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

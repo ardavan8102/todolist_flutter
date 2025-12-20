@@ -4,7 +4,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:tikino/core/helpers/category_list_init.dart';
 import 'package:tikino/core/styles/app_theme.dart';
 import 'package:tikino/data/model/for_providers/category.dart';
 import 'package:tikino/data/model/for_providers/priority.dart';
@@ -30,7 +29,6 @@ void main() async {
   await Hive.openBox<Todo>('todos');
   await Hive.openBox<TodoStats>('stats');
   await Hive.openBox<CategoryModel>('categories');
-  loadCategories();
 
   if (Hive.box<TodoStats>('stats').isEmpty) {
     Hive.box<TodoStats>('stats').put(
