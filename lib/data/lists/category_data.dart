@@ -25,5 +25,8 @@ const List<Color> categoryColors = [
   Colors.blueAccent,
   Colors.purpleAccent,
   Colors.black,
+  Colors.pink,
+  Colors.teal,
+  Colors.indigo,
   
 ];

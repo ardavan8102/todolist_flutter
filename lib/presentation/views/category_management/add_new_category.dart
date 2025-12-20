@@ -74,7 +74,7 @@ class _AddNewCategoryPageState extends State<AddNewCategoryPage> {
                 height: size.height * .08,
                 child: CategoryIconPicker(
                   selectedIcon: selectedIcon ?? categoryIcons[0],
-                  selectedColor: selectedColor ?? categoryColors[0],
+                  selectedColor: selectedColor ?? AppSolidColors.primary,
                   onSelect: (icon) {
                     setState(() {
                       selectedIcon = icon;

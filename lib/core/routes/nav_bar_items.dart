@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:tikino/core/consts/colors.dart';
+import 'package:tikino/main.dart';
 import 'package:tikino/presentation/views/main/category_management.dart';
 import 'package:tikino/presentation/views/main/homepage_screen.dart';
 import 'package:tikino/presentation/views/main/stats_page.dart';
 import 'package:tikino/presentation/views/main/tasks_list.dart';
-import 'package:tikino/presentation/widgets/todo_dialog.dart';
+import 'package:tikino/presentation/views/main/todo_add_page.dart';
 
 class AppNavBarPages {
 
@@ -43,12 +44,16 @@ class AppNavBarPages {
         ),
 
         PersistentBottomNavBarItem(
-            iconSize: 32,
-            icon: Icon(CupertinoIcons.add, color: Colors.white),
-            title: ("کـار جدید"),
-            activeColorPrimary: AppSolidColors.accent,
-            inactiveColorPrimary: CupertinoColors.systemGrey,
-            onPressed: (context) => showDialog(context: context!, builder: (_) => AddTodoDialog()),
+          iconSize: 32,
+          icon: Icon(CupertinoIcons.add, color: Colors.white),
+          title: ("کـار جدید"),
+          activeColorPrimary: AppSolidColors.accent,
+          inactiveColorPrimary: CupertinoColors.systemGrey,
+          onPressed: (_) {
+            rootNavigatorKey.currentState!.push(
+              CupertinoPageRoute(builder: (_) => const AddTodoPage())
+            );
+          },
         ),
 
         PersistentBottomNavBarItem(

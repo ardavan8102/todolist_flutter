@@ -1,0 +1,4 @@
+enum CategoryMenuAction {
+  edit,
+  delete,
+}

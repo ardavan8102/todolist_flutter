@@ -97,7 +97,7 @@ class _HomepageScreenState extends State<HomepageScreen> {
                             color: AppSolidColors.primary.withValues(alpha: .2),
                             borderRadius: .circular(16),
                             child: InkWell(
-                              onTap: () => homeGridNavigation(item),
+                              onTap: () => homeGridNavigation(item, context),
                               splashColor: AppSolidColors.whiteBackground.withValues(alpha: .5),
                               borderRadius: .circular(16),
                               child: Container(

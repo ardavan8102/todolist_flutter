@@ -7,12 +7,14 @@ environment:
   sdk: ^3.10.0
 
 dependencies:
+  adhan: ^2.0.0+1
   cupertino_icons: ^1.0.8
   flutter:
     sdk: flutter
   flutter_gen: ^5.9.0
   flutter_localizations:
     sdk: flutter
+  hijri: ^3.0.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   intl: ^0.20.2

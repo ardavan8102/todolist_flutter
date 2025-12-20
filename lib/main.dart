@@ -15,6 +15,8 @@ import 'package:tikino/data/provider/stats_provider.dart';
 import 'package:tikino/data/provider/todo_provider.dart';
 import 'package:tikino/presentation/widgets/bottom_nav_bar.dart';
 
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
@@ -41,7 +43,9 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
   // Run
-  runApp(const MyApp());
+  runApp(
+    const MyApp()
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -69,6 +73,8 @@ class MyApp extends StatelessWidget {
       ],
       
       child: MaterialApp(
+        
+        navigatorKey: rootNavigatorKey,
 
         // localization
         locale: const Locale('fa', 'IR'),

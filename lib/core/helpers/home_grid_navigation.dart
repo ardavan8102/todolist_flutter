@@ -1,10 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:tikino/data/model/grid_category_model.dart';
+import 'package:tikino/features/calendar/calendar_page.dart';
 
-void homeGridNavigation(HomeGridItem item){
+void homeGridNavigation(HomeGridItem item, BuildContext context){
 
   if (item.action == HomeGridAction.openCalender) {
                   
-    // TODO : open calendar page
+    Navigator.of(context).push(
+      CupertinoPageRoute(builder: (_) => CalenderPage())
+    );
 
   } else if (item.action == HomeGridAction.habitTracker) {
 
