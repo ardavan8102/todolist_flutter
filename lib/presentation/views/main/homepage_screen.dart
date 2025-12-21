@@ -94,7 +94,9 @@ class _HomepageScreenState extends State<HomepageScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Material(
-                            color: AppSolidColors.primary.withValues(alpha: .2),
+                            color: index == 0
+                              ? AppSolidColors.primary
+                              : AppSolidColors.primary.withValues(alpha: .2),
                             borderRadius: .circular(16),
                             child: InkWell(
                               onTap: () => homeGridNavigation(item, context),

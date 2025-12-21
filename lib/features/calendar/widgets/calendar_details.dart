@@ -50,11 +50,11 @@ class CalendarDetails extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          dateContainer(date, '🌍 میلادی: ${gregorian.year}/${gregorian.month}/${gregorian.day}', Colors.blueAccent),
+          dateContainer(date, '🌍 میلادی: ${gregorian.day} / ${gregorian.month} / ${gregorian.year}', Colors.blueAccent),
 
           const SizedBox(height: 12),
 
-          dateContainer(date, '🕌 قمری: ${hijri.hDay} ${hijri.longMonthName} ${hijri.hYear}', Colors.orange),
+          dateContainer(date, '🕌 قمری: ${hijri.hDay} / ${hijri.hMonth} / ${hijri.hYear}', Colors.orange),
 
           const SizedBox(height: 20),
 

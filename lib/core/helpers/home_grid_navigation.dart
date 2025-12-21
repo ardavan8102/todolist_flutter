@@ -11,19 +11,11 @@ void homeGridNavigation(HomeGridItem item, BuildContext context){
       CupertinoPageRoute(builder: (_) => CalenderPage())
     );
 
-  } else if (item.action == HomeGridAction.habitTracker) {
-
-    // TODO : Open habit tracker
-
-  } else if (item.action == HomeGridAction.openHomeWorkPage || item.action == HomeGridAction.openOccasionPage) {
+  } else {
 
     showCustomToast(
       text: 'منتظر آپدیت های ما باشید ...',
     );
-
-  } else {
-
-    // TODO : Open countdowns oage
 
   }
 

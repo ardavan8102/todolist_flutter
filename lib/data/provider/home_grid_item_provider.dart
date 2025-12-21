@@ -6,7 +6,7 @@ class HomeGridProvider with ChangeNotifier {
   List<HomeGridItem> get items => [
         HomeGridItem(
           title: 'تقویــم',
-          icon: Icon(Icons.calendar_today_sharp, color: AppSolidColors.primary, size: 30),
+          icon: Icon(Icons.calendar_today_sharp, color: AppSolidColors.whiteBackground, size: 30),
           action: HomeGridAction.openCalender,
         ),
         HomeGridItem(

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tikino/data/model/for_providers/category.dart';
 import 'package:tikino/data/model/for_providers/todo.dart';
+import 'package:tikino/data/provider/category_provider.dart';
 import 'package:tikino/presentation/widgets/icon_buttons/check_box_task_done.dart';
 import 'package:tikino/presentation/widgets/icon_buttons/delete_task.dart';
 
@@ -15,10 +18,23 @@ class TodoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final categoryProvider = context.watch<CategoryProvider>();
+
+    CategoryModel? category;
+
+    if (todo.categories.isNotEmpty) {
+      for ( final c in categoryProvider.categories ) {
+        if (c.id == todo.categories.first) {
+          category = c;
+          break;
+        }
+      }
+    }
+
     final color = Color(todo.colorValue);
 
     return Card(
-      key: ValueKey(todo.key), // ✅ VERY IMPORTANT (Hive)
+      key: ValueKey(todo.key), 
       margin: const EdgeInsets.all(15),
       elevation: 0,
       child: ListTile(
@@ -43,6 +59,9 @@ class TodoItem extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+        subtitle: category == null
+          ? null
+          : Text(category.title),
         trailing: DeleteTaskIconButton(
           todo: todo,
           color: color,

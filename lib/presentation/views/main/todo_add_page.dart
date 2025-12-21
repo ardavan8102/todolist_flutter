@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:tikino/core/consts/colors.dart';
-import 'package:tikino/core/helpers/convert_date_to_shamsi.dart';
 import 'package:tikino/data/lists/category_data.dart';
+import 'package:tikino/data/model/for_providers/category.dart';
 import 'package:tikino/data/model/for_providers/priority.dart';
+import 'package:tikino/data/provider/category_provider.dart';
 import 'package:tikino/data/provider/todo_provider.dart';
 import 'package:tikino/presentation/widgets/appbars/appbar_with_actions.dart';
 import 'package:tikino/presentation/widgets/textfields/add_todo/dialog_text_fields.dart';
@@ -18,6 +18,7 @@ class AddTodoPage extends StatefulWidget {
 }
 
 class _AddTodoPageState extends State<AddTodoPage> {
+
   final _titleController = TextEditingController();
 
   DateTime? _selectedDueDate;
@@ -26,10 +27,14 @@ class _AddTodoPageState extends State<AddTodoPage> {
 
   int? taskSelectedColor = AppSolidColors.primary.toARGB32();
 
+  String? _selectedCategoryId;
+
   @override
   Widget build(BuildContext context) {
 
     var size = MediaQuery.of(context).size;
+    
+    final categories = context.watch<CategoryProvider>().categories;
 
     return Scaffold(
       appBar: AppBarWithActionButtons(
@@ -76,12 +81,19 @@ class _AddTodoPageState extends State<AddTodoPage> {
         
               const SizedBox(height: 30),
 
-              SectionTitle(title: 'مهلت انجام کار'),
+              // categories
+              SectionTitle(title: 'دسته‌بندی'),
 
               const SizedBox(height: 12),
+
+              categorySelector(categories, size),
+
+              //// SectionTitle(title: 'مهلت انجام کار'),
+
+              //// const SizedBox(height: 12),
         
-              // date picker
-              datePickerForTask(),
+              //// date picker
+              //// datePickerForTask(),
         
               const SizedBox(height: 30),
 
@@ -174,27 +186,79 @@ class _AddTodoPageState extends State<AddTodoPage> {
     );
   }
 
-  InkWell datePickerForTask() {
-    return InkWell(
-      borderRadius: BorderRadius.circular(12),
-      onTap: _pickDueDate,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
-        decoration: BoxDecoration(
-          color: Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Text(
-          _selectedDueDate == null
-              ? 'تاریخ انجام را انتخاب کنید'
-              : '📅  ${formatJalali(_selectedDueDate!)}',
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 16),
-        ),
+  Widget categorySelector(List<CategoryModel> categories, Size size) {
+    if (categories.isEmpty) {
+      return const Text(
+        'دسته‌بندی‌ای وجود ندارد',
+        style: TextStyle(color: Colors.grey),
+      );
+    }
+
+    return SizedBox(
+      width: size.width,
+      height: size.height * .08,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: categories.map((category) {
+          final isSelected =
+              _selectedCategoryId == category.id;
+
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ChoiceChip(
+              avatar: Icon(
+                category.icon,
+                size: 18,
+                color: isSelected ? Colors.white : category.color,
+              ),
+              label: Text(category.title),
+              selected: isSelected,
+              selectedColor: category.color,
+              labelStyle: TextStyle(
+                color: isSelected ? Colors.white : Colors.black,
+              ),
+              onSelected: (_) {
+                setState(() {
+                  // 🔥 فقط یک انتخاب
+                  if (isSelected) {
+                    _selectedCategoryId = null; // اجازه unselect
+                  } else {
+                    _selectedCategoryId = category.id;
+                  }
+                });
+              },
+            ),
+          );
+        }).toList(),
       ),
     );
   }
+
+
+
+  // TODO : add to next versions
+
+  //// InkWell datePickerForTask() {
+  //   return InkWell(
+  //     borderRadius: BorderRadius.circular(12),
+  //     onTap: _pickDueDate,
+  //     child: Container(
+  //       width: double.infinity,
+  //       padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+  //       decoration: BoxDecoration(
+  //         color: Colors.grey.shade200,
+  //         borderRadius: BorderRadius.circular(12),
+  //       ),
+  //       child: Text(
+  //         _selectedDueDate == null
+  //             ? 'تاریخ انجام را انتخاب کنید'
+  //             : '📅  ${formatJalali(_selectedDueDate!)}',
+  //         textAlign: TextAlign.center,
+  //         style: const TextStyle(fontSize: 16),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   DropdownButtonFormField<TodoPriority> taskPriorityLevelDropDownField() {
     return DropdownButtonFormField<TodoPriority>(
@@ -269,25 +333,25 @@ class _AddTodoPageState extends State<AddTodoPage> {
     );
   }
 
-  Future<void> _pickDueDate() async {
-    final picked = await showPersianDatePicker(
-      context: context,
-      initialDate: Jalali.now(),
-      firstDate: Jalali.now(),
-      lastDate: Jalali(1500, 1),
-      holidayConfig: const PersianHolidayConfig(
-        weekendDays: {7},
-      ),
-      initialEntryMode: PersianDatePickerEntryMode.calendarOnly,
-      initialDatePickerMode: PersianDatePickerMode.day,
-    );
+  // Future<void> _pickDueDate() async {
+  //   final picked = await showPersianDatePicker(
+  //     context: context,
+  //     initialDate: Jalali.now(),
+  //     firstDate: Jalali.now(),
+  //     lastDate: Jalali(1500, 1),
+  //     holidayConfig: const PersianHolidayConfig(
+  //       weekendDays: {7},
+  //     ),
+  //     initialEntryMode: PersianDatePickerEntryMode.calendarOnly,
+  //     initialDatePickerMode: PersianDatePickerMode.day,
+  //   );
 
-    if (picked != null) {
-      setState(() {
-        _selectedDueDate = picked.toDateTime();
-      });
-    }
-  }
+  //   if (picked != null) {
+  //     setState(() {
+  //       _selectedDueDate = picked.toDateTime();
+  //     });
+  //   }
+  // }
 
   void addTodo() {
     final title = _titleController.text.trim();
@@ -301,6 +365,9 @@ class _AddTodoPageState extends State<AddTodoPage> {
         colorValue: taskSelectedColor!,
         dueDate: _selectedDueDate,
         priority: _selectedPriority,
+        categories: _selectedCategoryId == null
+          ? []
+          : [_selectedCategoryId!]
       );
 
       Navigator.pop(context);
