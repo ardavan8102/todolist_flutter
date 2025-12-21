@@ -9,10 +9,10 @@ a todo list application with provider & hive
 
 
 # 💫 Features
-Offline-database with hive
-Shamsi dates & times
-customizable tasks & categories
-Calendar page with date conversion and prayer times display
+Offline-database with hive<br>
+Shamsi dates & times<br>
+customizable tasks & categories<br>
+Calendar page with date conversion and prayer times display<br>
 
 # 📧 FeedBack
 If you have any feedback, please reach out to us at ardavaneskandari007@gmail.com
