@@ -4,8 +4,8 @@ a todo list application with provider & hive
 
 ## 💻 Teck Stack
 > Flutter / Dart
-> Provider
-> Hive
+>> Provider
+>>> Hive
 
 
 # 💫 Features
