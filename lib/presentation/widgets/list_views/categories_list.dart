@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tikino/data/lists/category_data.dart';
 import 'package:tikino/data/provider/category_provider.dart';
 import 'package:tikino/presentation/widgets/buttons/category_menu_action_button.dart';
 
@@ -10,6 +11,7 @@ class CategoriesManagementListView extends StatelessWidget {
   });
 
   final CategoryProvider provider;
+
   final TextTheme textTheme;
 
   @override
@@ -44,7 +46,7 @@ class CategoriesManagementListView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(
-                  category.icon,
+                  categoryIcons[category.iconIndex],
                   size: 24,
                   color: Colors.white,
                 ),

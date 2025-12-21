@@ -12,7 +12,7 @@ import 'package:tikino/data/provider/category_provider.dart';
 import 'package:tikino/data/provider/home_grid_item_provider.dart';
 import 'package:tikino/data/provider/stats_provider.dart';
 import 'package:tikino/data/provider/todo_provider.dart';
-import 'package:tikino/presentation/widgets/bottom_nav_bar.dart';
+import 'package:tikino/presentation/views/splash/splash.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(); // --> key for bottom navbar navigation
 
@@ -88,7 +88,7 @@ class MyApp extends StatelessWidget {
 
         theme: AppTheme.mainTheme,
 
-        home: CustomBottomNavigationBar(),
+        home: SplashScreen(),
       ),
     );
   }

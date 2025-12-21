@@ -4,13 +4,13 @@ import 'package:tikino/data/lists/category_data.dart';
 class CategoryIconPicker extends StatelessWidget {
   const CategoryIconPicker({
     super.key,
-    required this.selectedIcon,
+    required this.selectedIndex,
     required this.onSelect,
     required this.selectedColor,
   });
 
-  final IconData selectedIcon;
-  final ValueChanged<IconData> onSelect;
+  final int selectedIndex;
+  final ValueChanged<int> onSelect;
   final Color selectedColor;
 
   @override
@@ -20,14 +20,14 @@ class CategoryIconPicker extends StatelessWidget {
       itemCount: categoryIcons.length,
       itemBuilder: (context, index) {
         final icon = categoryIcons[index];
-        final isSelected = icon == selectedIcon;
+        final isSelected = index == selectedIndex;
 
         return Padding(
           padding: index == categoryIcons.length - 1
               ? EdgeInsets.zero
               : const EdgeInsets.only(left: 20),
           child: GestureDetector(
-            onTap: () => onSelect(icon),
+            onTap: () => onSelect(index),
             child: Container(
               width: 60,
               alignment: Alignment.center,

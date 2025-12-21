@@ -12,7 +12,7 @@ class CategoryModel extends HiveObject {
   String title;
 
   @HiveField(2)
-  int iconCodePoint;
+  int iconIndex;
 
   @HiveField(3)
   int colorValue;
@@ -20,18 +20,11 @@ class CategoryModel extends HiveObject {
   CategoryModel({
     required this.id,
     required this.title,
-    required this.iconCodePoint,
+    required this.iconIndex,
     required this.colorValue,
   });
 
 
   Color get color => Color(colorValue);
-
-
-  IconData get icon => IconData(
-    iconCodePoint,
-    fontFamily: 'CupertinoIcons',
-    fontPackage: 'cupertino_icons',
-  );
 
 }

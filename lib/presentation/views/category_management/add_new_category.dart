@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tikino/core/consts/colors.dart';
-import 'package:tikino/data/lists/category_data.dart';
 import 'package:tikino/data/provider/category_provider.dart';
 import 'package:tikino/presentation/widgets/appbars/appbar_with_actions.dart';
 import 'package:tikino/presentation/widgets/buttons/full_width_update_button.dart';
@@ -23,7 +22,7 @@ class _AddNewCategoryPageState extends State<AddNewCategoryPage> {
 
   final TextEditingController _titleEditingController = TextEditingController();
 
-  IconData? selectedIcon;
+  int? selectedIndex;
   
   Color? selectedColor;
 
@@ -80,11 +79,11 @@ class _AddNewCategoryPageState extends State<AddNewCategoryPage> {
               SizedBox(
                 height: size.height * .08,
                 child: CategoryIconPicker(
-                  selectedIcon: selectedIcon ?? categoryIcons[0],
+                  selectedIndex: selectedIndex ?? 0,
                   selectedColor: selectedColor ?? AppSolidColors.primary,
-                  onSelect: (icon) {
+                  onSelect: (index) {
                     setState(() {
-                      selectedIcon = icon;
+                      selectedIndex = index;
                     });
                   },
                 ),
@@ -114,7 +113,7 @@ class _AddNewCategoryPageState extends State<AddNewCategoryPage> {
                 function: () {
                   provider.addCategory(
                     _titleEditingController.text.trim(),
-                    selectedIcon ?? categoryIcons[0],
+                    selectedIndex ?? 0,
                     selectedColor ?? AppSolidColors.primary
                   );
 

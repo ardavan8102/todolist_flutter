@@ -23,13 +23,13 @@ class CategoryProvider extends ChangeNotifier {
 
   Future<void> addCategory(
     String title,
-    IconData icon,
+    int index,
     Color color,
   ) async {
     final category = CategoryModel(
       id: const Uuid().v4(),
       title: title,
-      iconCodePoint: icon.codePoint,
+      iconIndex: index,
       colorValue: color.toARGB32(),
     );
 

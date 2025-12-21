@@ -1,8 +1,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- permission for notifications -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
     <application
-        android:label="tikino"
+        android:label="Tikino"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+        <!-- permission for notifications -->
+        <service
+            android:name="com.pravera.flutter_foreground_task.service.ForegroundService"
+            android:enabled="true"
+            android:exported="false"/>
+
+        <receiver
+            android:name="com.pravera.flutter_foreground_task.service.RestartReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <!-- end of permission for notifications -->
         <activity
             android:name=".MainActivity"
             android:exported="true"

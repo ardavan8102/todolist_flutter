@@ -25,7 +25,7 @@ class _EditCategoryPageState extends State<EditCategoryPage> {
 
   final TextEditingController _titleEditingController = TextEditingController();
 
-  late IconData selectedIcon;
+  late int selectedIndex;
 
   late Color selectedColor;
 
@@ -34,7 +34,7 @@ class _EditCategoryPageState extends State<EditCategoryPage> {
     super.initState();
 
     _titleEditingController.text = widget.selectedCategory.title;
-    selectedIcon = widget.selectedCategory.icon;
+    selectedIndex = widget.selectedCategory.iconIndex;
     selectedColor = widget.selectedCategory.color;
   }
 
@@ -86,11 +86,11 @@ class _EditCategoryPageState extends State<EditCategoryPage> {
               SizedBox(
                 height: size.height * .08,
                 child: CategoryIconPicker(
-                  selectedIcon: selectedIcon,
+                  selectedIndex: selectedIndex,
                   selectedColor: selectedColor,
                   onSelect: (icon) {
                     setState(() {
-                      selectedIcon = icon;
+                      selectedIndex = icon;
                     });
                   },
                 ),
@@ -121,7 +121,7 @@ class _EditCategoryPageState extends State<EditCategoryPage> {
                   final category = widget.selectedCategory;
 
                   category.title = _titleEditingController.text.trim();
-                  category.iconCodePoint = selectedIcon.codePoint;
+                  category.iconIndex = selectedIndex;
                   category.colorValue = selectedColor.toARGB32();
                   
 

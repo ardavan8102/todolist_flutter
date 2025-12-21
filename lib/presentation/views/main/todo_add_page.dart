@@ -207,7 +207,7 @@ class _AddTodoPageState extends State<AddTodoPage> {
             padding: const EdgeInsets.all(8.0),
             child: ChoiceChip(
               avatar: Icon(
-                category.icon,
+                categoryIcons[category.iconIndex],
                 size: 18,
                 color: isSelected ? Colors.white : category.color,
               ),
